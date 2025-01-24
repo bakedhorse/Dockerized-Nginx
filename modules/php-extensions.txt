@@ -1,0 +1,16 @@
+bcmath
+cli
+common
+curl
+dev
+gd
+imagick
+imap
+mbstring
+mysql
+opcache
+readline
+soap
+xml
+xmlrpc
+zip

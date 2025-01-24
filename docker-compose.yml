@@ -1,0 +1,24 @@
+services:
+  # Frigate Cameras
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        APT_UPDATE_ON_START: ${APT_UPDATE_ON_START}
+    restart: unless-stopped
+    #network_mode: host  # Uncomment if u need access to host network
+    volumes:
+      - "${APP_DIR}/modules/:/app/modules"
+      - "${APP_DIR}/conf/nginx/:/etc/nginx/"
+      - "${APP_DIR}/conf/www/:/var/www/"
+      - "${APP_DIR}/conf/php/:/etc/php/"
+      - "${APP_DIR}/logs/:/var/log/nginx/"
+      #- "${APP_DIR}/scripts/app.sh:/app/scripts/app.sh"
+      #- "/etc/acme.sh/:/etc/acme.sh"
+    ports:
+      - "80:80"
+      - "443:443" # SSL
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
