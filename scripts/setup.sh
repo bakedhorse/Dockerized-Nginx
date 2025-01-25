@@ -14,7 +14,7 @@ add-apt-repository ppa:ondrej/php
 apt update
 
 # Install nginx and php
-apt install -y nginx php$PHP_VERSION php$PHP_VERSION-fpm --no-install-recommends
+apt install -y nginx libnginx-mod-http-headers-more-filter php$PHP_VERSION php$PHP_VERSION-fpm --no-install-recommends
 
 # Disable the default site file (it will be enabled on startup of container due to the default nginx-sites.txt file)
 rm /etc/nginx/sites-enabled/default

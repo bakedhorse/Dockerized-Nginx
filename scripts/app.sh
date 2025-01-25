@@ -75,6 +75,9 @@ echo "==Listing PHP Module Packages"
 apt list --installed | grep php$PHP_VERSION
 echo
 
+# Nginx module folder link
+ln -s /usr/share/nginx/modules/ /etc/nginx/modules/
+
 # Nginx sites
 echo
 echo "==Enabling nginx sites..."
@@ -83,6 +86,9 @@ if [ -f "$site_file" ]; then
     sed -i 's/\r$//' $site_file
     sed -i -e '$a\' $site_file
     while IFS= read -r module; do
+        if [ -z "$module" ]; then
+            continue  # Skip to the next iteration
+        fi
         if [[ $module == -* ]]; then
             module=${module#*-}
             echo "Disabling $module"
