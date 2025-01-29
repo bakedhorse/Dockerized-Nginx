@@ -1,5 +1,4 @@
 services:
-  # Frigate Cameras
   nginx:
     build:
       context: ./
@@ -15,6 +14,8 @@ services:
       - "${APP_DIR}/conf/www/:/var/www/"
       - "${APP_DIR}/conf/php/:/etc/php/"
       - "${APP_DIR}/logs/:/var/log/nginx/"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
       #- "${APP_DIR}/scripts/app.sh:/app/scripts/app.sh"
       #- "/etc/acme.sh/:/etc/acme.sh"
     ports:
