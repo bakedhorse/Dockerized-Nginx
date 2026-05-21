@@ -54,8 +54,9 @@ server {
 
 ## Modules for NGINX
 Due to the nature of NGINX's modules normally being baked in from the build process, there's a limited set of modules that can be used without building nginx from scratch. The modules that can be installed are called "dynamic modules".<br>
-This Dockerfile uses [ppa:ondrej/nginx](https://launchpad.net/~ondrej/+archive/ubuntu/nginx/) repo which comes with some modules baked in, such as HTTP2. The Dockerfile also includes `headers-more-filter` from the same repo.<br>
-Recommend going through the repo to find any dynamic module you want that's available and adding it in the `additional-packages.txt` in the `modules` folder. (*THIS WILL REQUIRE THE DOCKERFILE IMAGE TO BE RE-BUILT*)<br>
+This Dockerfile uses the official [nginx.org Ubuntu repository](https://nginx.org/en/linux_packages.html#Ubuntu), configured for the latest `stable` channel.<br>
+The build also compiles `headers-more` as a compatible dynamic module after nginx and PHP are installed, so `ngx_http_headers_more_filter_module.so` is available in the nginx modules directory after image creation.<br>
+Recommend going through the nginx.org package repo to find any additional packaged dynamic module you want and adding it in the `additional-packages.txt` in the `modules` folder. (*THIS WILL REQUIRE THE DOCKERFILE IMAGE TO BE RE-BUILT*)<br>
 <br>
 The modules installed from `apt` are stored in `/usr/share/nginx/modules/`. When you go into this directory, look for each module's file name and copy it. Don't forget it's extension which is usually `.so` Then add a line into the nginx.conf script at the top for each module. (Replace `<FILENAME>` with the file name, duh)
 ```

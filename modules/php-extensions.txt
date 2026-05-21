@@ -5,10 +5,10 @@ curl
 dev
 gd
 imagick
-imap
+#imap
 mbstring
 mysql
-opcache
+#opcache
 readline
 soap
 xml

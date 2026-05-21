@@ -1,5 +1,5 @@
 # Use Ubuntu as base image
-FROM ubuntu:22.04
+FROM ubuntu:26.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 ARG APPDIR=/app
