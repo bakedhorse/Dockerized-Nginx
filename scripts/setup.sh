@@ -7,11 +7,10 @@ cd /app
 # Refresh Updates
 apt update
 # Get add-apt-repository
-apt install -y software-properties-common --no-install-recommends
+apt install -y software-properties-common curl gnupg2 ca-certificates lsb-release ubuntu-keyring --no-install-recommends
+install -d -m 700 /root/.gnupg
 
 # Install nginx repo
-apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring --no-install-recommends
-install -d -m 700 /root/.gnupg
 curl -fsSL https://nginx.org/keys/nginx_signing.key | gpg --dearmor | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
 gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg | grep -q '573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62'
 echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] https://nginx.org/packages/ubuntu $(lsb_release -cs) nginx" | tee /etc/apt/sources.list.d/nginx.list >/dev/null

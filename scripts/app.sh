@@ -76,7 +76,25 @@ apt list --installed | grep php$PHP_VERSION
 echo
 
 # Nginx module folder link
-ln -s /usr/share/nginx/modules/ /etc/nginx/modules/
+headers_more_module_file=""
+for candidate in \
+    /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so \
+    /usr/share/nginx/modules/ngx_http_headers_more_filter_module.so
+do
+    if [ -f "$candidate" ]; then
+        headers_more_module_file="$candidate"
+        break
+    fi
+done
+
+if [ -n "$headers_more_module_file" ]; then
+    mkdir -p /etc/nginx/modules
+    cp -f "$headers_more_module_file" /etc/nginx/modules/
+
+    if ! grep -q 'load_module modules/ngx_http_headers_more_filter_module.so;' /etc/nginx/nginx.conf; then
+        sed -i '1iload_module modules/ngx_http_headers_more_filter_module.so;' /etc/nginx/nginx.conf
+    fi
+fi
 
 # Nginx sites
 echo
