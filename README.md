@@ -1,5 +1,5 @@
 # Dockerized-Nginx (Good-Enough-4-me)
-This is a project made using docker Ubuntu 22.04, NGINX, and PHP.<br>
+This is a project made using docker Ubuntu 26.04, NGINX, and PHP.<br>
 Meant to be a very barebones Docker for having a simple web server or proxy.
 
 ## Installation
@@ -26,9 +26,9 @@ APT_UPDATE_ON_START=1
 This parameter tells app.sh script will do `apt update` and `apt upgrade` on each start up. Would recommend having this disabled as this has a tendency to freeze randomly, along with this not saving any updated packages after a restart.
 <br>
 ```
-PHP_VERSION=8.3
+PHP_VERSION=8.5
 ```
-This parameter tells what version of PHP to download and use. The Dockerfile uses the [ppa:ondrej/php](https://launchpad.net/~ondrej/+archive/ubuntu/php/) repo, and is recommended to check what version you can/cannot use.
+This parameter tells what version of PHP to download and use. (php 8.5 is the current version in the official Ubuntu 26.04 repos)
 <br>
 
 ## Storage of WWW, NGINX, and PHP folders
